@@ -1,8 +1,10 @@
-const Input = () => {
+const Input = ({ placeholder, type }) => {
 	return (
-		<>
-			<input className="border-none border-b-2 border-b-secondary outline-none bg-transparent" />
-		</>
+		<input
+			type={type}
+			placeholder={placeholder}
+			className="input w-full max-w-xs border-b-2 border-b-accent rounded-none"
+		/>
 	);
 };
 

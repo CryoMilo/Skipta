@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 
 function App() {
 	return (
-		<div>
+		<div className="max-w-[800px] mx-auto my-10 px-8">
 			<BasePlate>
 				<Navbar />
 				<Home />
