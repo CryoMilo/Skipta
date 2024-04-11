@@ -1,7 +1,14 @@
+import BasePlate from "./common/BasePlate";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+
 function App() {
 	return (
 		<div>
-			<p className="bg-red-500">Skipta</p>
+			<BasePlate>
+				<Navbar />
+				<Home />
+			</BasePlate>
 		</div>
 	);
 }
