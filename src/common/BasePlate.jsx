@@ -1,5 +1,5 @@
 const BasePlate = ({ children }) => {
-	return <div className="h-[85vh]">{children}</div>;
+	return <div>{children}</div>;
 };
 
 export default BasePlate;
