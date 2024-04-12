@@ -3,7 +3,7 @@ const Input = ({ placeholder, type }) => {
 		<input
 			type={type}
 			placeholder={placeholder}
-			className="input w-full max-w-xs border-b-2 border-b-accent rounded-none"
+			className="input text-center w-full max-w-xs border-b-2 border-b-accent rounded-none"
 		/>
 	);
 };
