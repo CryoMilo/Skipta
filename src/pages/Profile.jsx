@@ -1,6 +1,6 @@
 import Input from "../common/Input";
 
-const Register = () => {
+const Profile = () => {
 	return (
 		<section className="w-full my-10">
 			<div className="flex flex-col items-center justify-center">
@@ -14,7 +14,6 @@ const Register = () => {
 
 			<div className="my-10 max-w-[400px] mx-auto">
 				<table className="table w-full my-10">
-					{/* head */}
 					<thead className="text-center">
 						<tr className="border-none">
 							<th>Place</th>
@@ -22,12 +21,10 @@ const Register = () => {
 						</tr>
 					</thead>
 					<tbody className="text-center">
-						{/* row 1 */}
 						<tr className="border-none">
 							<th>Cy Ganderton</th>
 							<td>499</td>
 						</tr>
-						{/* row 2 */}
 						<tr className="border-none">
 							<th>Hart Hagerty</th>
 							<td>289</td>
@@ -43,4 +40,4 @@ const Register = () => {
 	);
 };
 
-export default Register;
+export default Profile;
