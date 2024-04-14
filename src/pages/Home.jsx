@@ -1,31 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Avatar from "../common/Avatar";
 import Input from "../common/Input";
+import { useSelector } from "react-redux";
 
 const Home = () => {
 	const [selectedProfile, setSelectedProfile] = useState(1);
-	const [profiles, setProfiles] = useState([
-		{
-			id: 1,
-			img: "https://xsgames.co/randomusers/avatar.php?g=pixel",
-			active: true,
-		},
-		{
-			id: 2,
-			img: "https://xsgames.co/randomusers/avatar.php?g=pixel",
-			active: false,
-		},
-		{
-			id: 3,
-			img: "https://xsgames.co/randomusers/avatar.php?g=pixel",
-			active: false,
-		},
-		{
-			id: 4,
-			img: "https://xsgames.co/randomusers/avatar.php?g=pixel",
-			active: false,
-		},
-	]);
+
+	const profileData = useSelector((state) => state.profile);
+
+	const [profiles, setProfiles] = useState(profileData.data);
+
+	useEffect(() => {
+		console.log(profileData.data);
+		setProfiles(profileData.data);
+	}, []);
 
 	const updateSelectedProfile = (id) => {
 		setSelectedProfile(id);
@@ -55,14 +43,20 @@ const Home = () => {
 						<Avatar active={active} img={img} />
 					</div>
 				))}
+				<a href="/profile/new" className="avatar placeholder cursor-pointer">
+					<div className="bg-gray-500 text-neutral-content rounded-full w-16">
+						<span className="text-4xl">+</span>
+					</div>
+				</a>
 			</div>
 			<div className="flex gap-2 my-10 w-full max-w-[400px] mx-auto">
 				<a href={`/profile/edit/${selectedProfile}`} className="w-1/2">
 					<button className="btn bg-primary w-full">Edit</button>
 				</a>
-				<a href="/profile/new" className="w-1/2">
-					<button className="btn bg-secondary w-full">Add Yourself</button>
-				</a>
+
+				<div className="w-1/2">
+					<button className="btn bg-secondary w-full">Paid</button>
+				</div>
 			</div>
 		</section>
 	);

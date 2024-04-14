@@ -20,7 +20,7 @@ const router = createBrowserRouter([
 
 function App() {
 	return (
-		<div className="max-w-[800px] mx-auto my-10 px-8">
+		<div className="max-w-[800px] my-10 mx-auto px-8">
 			<Navbar />
 			<RouterProvider router={router} />
 		</div>
