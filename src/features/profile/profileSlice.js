@@ -4,25 +4,25 @@ const initialState = {
 	data: [
 		{
 			id: 1,
-			name: "John",
+			username: "John",
 			img: "https://xsgames.co/randomusers/avatar.php?g=pixel",
 			active: true,
 		},
 		{
 			id: 2,
-			name: "Mia",
+			username: "Mia",
 			img: "https://xsgames.co/randomusers/avatar.php?g=pixel",
 			active: false,
 		},
 		{
 			id: 3,
-			name: "Damian",
+			username: "Damian",
 			img: "https://xsgames.co/randomusers/avatar.php?g=female",
 			active: false,
 		},
 		{
 			id: 4,
-			name: "Aurora",
+			username: "Aurora",
 			img: "https://xsgames.co/randomusers/avatar.php?g=male",
 			active: false,
 		},

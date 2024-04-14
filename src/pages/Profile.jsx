@@ -1,18 +1,26 @@
 import { useForm } from "react-hook-form";
 import { addProfile } from "../features/profile/profileSlice";
-// import Input from "../common/Input";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import Input from "../common/Input";
 
 const Profile = () => {
 	const { register, handleSubmit } = useForm();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	const { id } = useParams();
+
+	const profileData = useSelector((state) => state.profile);
+
+	const currentProfileData = profileData.data.filter(
+		(item) => item.id === parseInt(id)
+	);
+
 	const onSubmit = (data) => {
 		dispatch(
 			addProfile({
-				name: data.username,
+				username: data.username,
 				img: "https://xsgames.co/randomusers/avatar.php?g=female",
 				active: false,
 			})
@@ -28,10 +36,10 @@ const Profile = () => {
 						<img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
 					</div>
 				</div>
-				<input
+				<Input
 					type="text"
 					placeholder="What's your name?"
-					defaultValue="test"
+					defaultValue={currentProfileData[0].username}
 					{...register("username")}
 				/>
 			</div>

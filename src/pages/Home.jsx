@@ -11,7 +11,6 @@ const Home = () => {
 	const [profiles, setProfiles] = useState(profileData.data);
 
 	useEffect(() => {
-		console.log(profileData.data);
 		setProfiles(profileData.data);
 	}, []);
 
