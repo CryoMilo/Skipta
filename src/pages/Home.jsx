@@ -31,12 +31,12 @@ const Home = () => {
 	};
 
 	const onSubmit = (data) => {
-		console.log(data);
+		alert(JSON.stringify(data));
 	};
 
 	return (
-		<section className="my-10">
-			<form onSubmit={handleSubmit(onSubmit)} className="my-10">
+		<form onSubmit={handleSubmit(onSubmit)} className="my-10">
+			<div className="my-10">
 				<div className="flex w-full items-center flex-col gap-10">
 					<Input
 						name="place"
@@ -51,7 +51,7 @@ const Home = () => {
 						control={control}
 					/>
 				</div>
-			</form>
+			</div>
 			<p className="text-center w-full">Who are you?</p>
 			<div className="grid grid-cols-3 place-items-center max-w-[400px] mx-auto my-10 text-center gap-6">
 				{profiles.map(({ id, img, active }) => (
@@ -67,7 +67,7 @@ const Home = () => {
 			</div>
 			<div className="flex gap-2 my-10 w-full max-w-[400px] mx-auto">
 				<a href={`/profile/edit/${selectedProfile}`} className="w-1/2">
-					<button className="btn bg-primary w-full">Edit</button>
+					<div className="btn bg-primary w-full">Edit</div>
 				</a>
 
 				<div className="w-1/2">
@@ -76,7 +76,7 @@ const Home = () => {
 					</button>
 				</div>
 			</div>
-		</section>
+		</form>
 	);
 };
 

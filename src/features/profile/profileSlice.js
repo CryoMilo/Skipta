@@ -36,12 +36,19 @@ export const profileSlice = createSlice({
 		addProfile: (state, action) => {
 			state.data.push({ ...action.payload });
 		},
+		updateProfile: (state, action) => {
+			const { id, ...updatedFields } = action.payload;
+			const existingProfile = state.data.find((profile) => profile.id === id);
+			if (existingProfile) {
+				Object.assign(existingProfile, updatedFields);
+			}
+		},
 		resetAll: (state) => {
 			state.data = initialState.data;
 		},
 	},
 });
 
-export const { addProfile, resetAll } = profileSlice.actions;
+export const { addProfile, resetAll, updateProfile } = profileSlice.actions;
 
 export default profileSlice.reducer;
