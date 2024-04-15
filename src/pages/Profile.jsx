@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Input from "../common/Input";
 
-const Profile = () => {
+const Profile = ({ isNew }) => {
 	const { register, handleSubmit } = useForm();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -13,15 +13,17 @@ const Profile = () => {
 
 	const profileData = useSelector((state) => state.profile);
 
-	const currentProfileData = profileData.data.filter(
-		(item) => item.id === parseInt(id)
-	);
+	const currentProfileData = isNew
+		? []
+		: profileData.data.filter((item) => item.id === parseInt(id));
 
 	const onSubmit = (data) => {
+		console.log(data.username);
 		dispatch(
 			addProfile({
+				id: 6,
 				username: data.username,
-				img: "https://xsgames.co/randomusers/avatar.php?g=female",
+				img: "https://i.pinimg.com/564x/e9/aa/76/e9aa762a356a42366de63647dbb79789.jpg",
 				active: false,
 			})
 		);
@@ -33,13 +35,13 @@ const Profile = () => {
 			<div className="flex flex-col items-center justify-center">
 				<div className="avatar my-10 ">
 					<div className={`w-36 rounded-full`}>
-						<img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+						<img src={currentProfileData[0]?.img} />
 					</div>
 				</div>
 				<Input
 					type="text"
 					placeholder="What's your name?"
-					defaultValue={currentProfileData[0].username}
+					defaultValue={currentProfileData[0]?.username}
 					{...register("username")}
 				/>
 			</div>

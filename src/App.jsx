@@ -10,7 +10,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/profile/new",
-		element: <Profile />,
+		element: <Profile isNew />,
 	},
 	{
 		path: "/profile/edit/:id",
