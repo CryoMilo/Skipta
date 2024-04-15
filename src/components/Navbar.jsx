@@ -1,11 +1,11 @@
-import Receipt from "../assets/icons/Receipt";
+import ReceiptIcon from "../assets/icons/ReceiptIcon";
 import { ThemeController } from "../common/ThemeController";
 
 const Navbar = () => {
 	return (
 		<div className="flex justify-end gap-3">
 			<ThemeController />
-			<Receipt />
+			<ReceiptIcon />
 		</div>
 	);
 };

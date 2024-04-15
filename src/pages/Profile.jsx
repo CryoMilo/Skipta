@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
-import { addProfile } from "../features/profile/profileSlice";
+import { addProfile, resetAll } from "../features/profile/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Input from "../common/Input";
+import HomeIcon from "../assets/icons/HomeIcon";
 
 const Profile = ({ isNew }) => {
-	const { register, handleSubmit } = useForm();
+	const { handleSubmit, control } = useForm();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -18,8 +19,8 @@ const Profile = ({ isNew }) => {
 		: profileData.data.filter((item) => item.id === parseInt(id));
 
 	const onSubmit = (data) => {
-		console.log(data.username);
 		dispatch(
+			// resetAll()
 			addProfile({
 				id: 6,
 				username: data.username,
@@ -33,16 +34,20 @@ const Profile = ({ isNew }) => {
 	return (
 		<form className="w-full my-10" onSubmit={handleSubmit(onSubmit)}>
 			<div className="flex flex-col items-center justify-center">
+				<div onClick={() => navigate("/")}>
+					<HomeIcon />
+				</div>
 				<div className="avatar my-10 ">
 					<div className={`w-36 rounded-full`}>
 						<img src={currentProfileData[0]?.img} />
 					</div>
 				</div>
 				<Input
+					control={control}
+					name="username"
 					type="text"
 					placeholder="What's your name?"
 					defaultValue={currentProfileData[0]?.username}
-					{...register("username")}
 				/>
 			</div>
 
@@ -71,6 +76,13 @@ const Profile = ({ isNew }) => {
 				<button type="submit" className="btn btn-wide bg-secondary flex">
 					Add Yourself
 				</button>
+			</div>
+			<div className="flex justify-center my-10">
+				<div
+					onClick={() => dispatch(resetAll())}
+					className="btn btn-wide bg-gray-500 flex">
+					Reset State
+				</div>
 			</div>
 		</form>
 	);

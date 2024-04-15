@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import Avatar from "../common/Avatar";
 import Input from "../common/Input";
 import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 
 const Home = () => {
 	const [selectedProfile, setSelectedProfile] = useState(1);
+
+	const { control, handleSubmit } = useForm();
 
 	const profileData = useSelector((state) => state.profile);
 
@@ -27,14 +30,28 @@ const Home = () => {
 		});
 	};
 
+	const onSubmit = (data) => {
+		console.log(data);
+	};
+
 	return (
 		<section className="my-10">
-			<div className="my-10">
+			<form onSubmit={handleSubmit(onSubmit)} className="my-10">
 				<div className="flex w-full items-center flex-col gap-10">
-					<Input type="text" placeholder="Where did you pay?" />
-					<Input type="number" placeholder="Amount" />
+					<Input
+						name="place"
+						type="text"
+						placeholder="Where did you pay?"
+						control={control}
+					/>
+					<Input
+						name="amount"
+						type="number"
+						placeholder="Amount"
+						control={control}
+					/>
 				</div>
-			</div>
+			</form>
 			<p className="text-center w-full">Who are you?</p>
 			<div className="grid grid-cols-3 place-items-center max-w-[400px] mx-auto my-10 text-center gap-6">
 				{profiles.map(({ id, img, active }) => (
@@ -54,7 +71,9 @@ const Home = () => {
 				</a>
 
 				<div className="w-1/2">
-					<button className="btn bg-secondary w-full">Paid</button>
+					<button type="submit" className="btn bg-secondary w-full">
+						Paid
+					</button>
 				</div>
 			</div>
 		</section>

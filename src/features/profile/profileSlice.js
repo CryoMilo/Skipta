@@ -36,9 +36,12 @@ export const profileSlice = createSlice({
 		addProfile: (state, action) => {
 			state.data.push({ ...action.payload });
 		},
+		resetAll: (state) => {
+			state.data = initialState.data;
+		},
 	},
 });
 
-export const { addProfile } = profileSlice.actions;
+export const { addProfile, resetAll } = profileSlice.actions;
 
 export default profileSlice.reducer;
