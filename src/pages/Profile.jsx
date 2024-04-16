@@ -8,9 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Input from "../common/Input";
 import HomeIcon from "../assets/icons/HomeIcon";
+import ImageUpload from "../components/ImageUpload";
+import { useState } from "react";
+import dummyProfile from "../assets/images/dummyProfile.jpg";
 
 const Profile = ({ isNew }) => {
 	const { handleSubmit, control } = useForm();
+	const [newUploadedImg, setNewUploadedImg] = useState();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -28,7 +32,7 @@ const Profile = ({ isNew }) => {
 				addProfile({
 					id: 6,
 					username: data.username,
-					img: "https://i.pinimg.com/564x/e9/aa/76/e9aa762a356a42366de63647dbb79789.jpg",
+					img: newUploadedImg || dummyProfile,
 					active: false,
 				})
 			);
@@ -37,7 +41,7 @@ const Profile = ({ isNew }) => {
 				updateProfile({
 					id: currentProfileData[0].id,
 					username: data.username,
-					img: currentProfileData[0].img,
+					img: newUploadedImg ? newUploadedImg : currentProfileData[0].img,
 					active: false,
 				})
 			);
@@ -50,11 +54,11 @@ const Profile = ({ isNew }) => {
 				<div onClick={() => navigate("/")}>
 					<HomeIcon />
 				</div>
-				<div className="avatar my-10 ">
-					<div className={`w-36 rounded-full`}>
-						<img src={currentProfileData[0]?.img} />
-					</div>
-				</div>
+				<ImageUpload
+					isNew={isNew}
+					currentProfileImg={currentProfileData[0]?.img}
+					setNewUploadedImg={setNewUploadedImg}
+				/>
 				<Input
 					control={control}
 					name="username"
