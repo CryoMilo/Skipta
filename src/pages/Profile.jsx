@@ -24,13 +24,13 @@ const Profile = ({ isNew }) => {
 
 	const currentProfileData = isNew
 		? []
-		: profileData.data.filter((item) => item.id === parseInt(id));
+		: profileData.data.filter((item) => item.id === id);
 
 	const onSubmit = (data) => {
 		if (isNew) {
 			dispatch(
 				addProfile({
-					id: 6,
+					id: crypto.randomUUID(),
 					username: data.username,
 					img: newUploadedImg || dummyProfile,
 					active: false,
