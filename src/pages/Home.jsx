@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import Avatar from "../common/Avatar";
 import Input from "../common/Input";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import { addBill } from "../features/bill/billSlice";
 
 const Home = () => {
-	const [selectedProfile, setSelectedProfile] = useState(1);
+	const [selectedProfile, setSelectedProfile] = useState({});
+
+	const dispatch = useDispatch();
 
 	const { control, handleSubmit } = useForm();
 
@@ -15,23 +18,23 @@ const Home = () => {
 
 	useEffect(() => {
 		setProfiles(profileData.data);
-	}, []);
+	}, [profileData]);
 
-	const updateSelectedProfile = (id) => {
-		setSelectedProfile(id);
+	const updateSelectedProfile = (currentProfile) => {
 		setProfiles((prevProfiles) => {
 			return prevProfiles.map((profile) => {
-				if (profile.id === id) {
+				if (profile.id === currentProfile.id) {
 					return { ...profile, active: !profile.active }; // Toggle the active status
 				} else {
 					return { ...profile, active: false }; // Set others to false
 				}
 			});
 		});
+		setSelectedProfile(currentProfile);
 	};
 
 	const onSubmit = (data) => {
-		alert(JSON.stringify(data));
+		dispatch(addBill({ payer: selectedProfile, ...data }));
 	};
 
 	return (
@@ -54,9 +57,9 @@ const Home = () => {
 			</div>
 			<p className="text-center w-full">Who are you?</p>
 			<div className="grid grid-cols-3 place-items-center max-w-[400px] mx-auto my-10 text-center gap-6">
-				{profiles.map(({ id, img, active }) => (
-					<div key={id} onClick={() => updateSelectedProfile(id)}>
-						<Avatar active={active} img={img} />
+				{profiles.map((profile) => (
+					<div key={profile.id} onClick={() => updateSelectedProfile(profile)}>
+						<Avatar active={profile.active} img={profile.img} />
 					</div>
 				))}
 				<a href="/profile/new" className="avatar placeholder cursor-pointer">
@@ -66,7 +69,7 @@ const Home = () => {
 				</a>
 			</div>
 			<div className="flex gap-2 my-10 w-full max-w-[400px] mx-auto">
-				<a href={`/profile/edit/${selectedProfile}`} className="w-1/2">
+				<a href={`/profile/edit/${selectedProfile.id}`} className="w-1/2">
 					<div className="btn bg-primary w-full">Edit</div>
 				</a>
 

@@ -11,6 +11,7 @@ import HomeIcon from "../assets/icons/HomeIcon";
 import ImageUpload from "../components/ImageUpload";
 import { useState } from "react";
 import dummyProfile from "../assets/images/dummyProfile.jpg";
+import { resetBill } from "../features/bill/billSlice";
 
 const Profile = ({ isNew }) => {
 	const { handleSubmit, control } = useForm();
@@ -96,7 +97,10 @@ const Profile = ({ isNew }) => {
 			</div>
 			<div className="flex justify-center my-10">
 				<div
-					onClick={() => dispatch(resetAll())}
+					onClick={() => {
+						dispatch(resetAll());
+						dispatch(resetBill());
+					}}
 					className="btn btn-wide bg-gray-500 flex">
 					Reset State
 				</div>
