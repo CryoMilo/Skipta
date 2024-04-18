@@ -15,7 +15,9 @@ const Vouncher = () => {
 				<p className="text-center my-11">No Vouncher to resolve yet</p>
 			)}
 			{billData?.data.map((bill) => (
-				<Bill key={bill.id} bill={bill} />
+				<div key={bill.id}>
+					<Bill bill={bill} />
+				</div>
 			))}
 			<div className="flex gap-2 my-10 w-full max-w-[400px] mx-auto">
 				<div className="w-1/2">

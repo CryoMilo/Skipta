@@ -35,7 +35,9 @@ const Home = () => {
 	};
 
 	const onSubmit = (data) => {
-		dispatch(addBill({ payer: selectedProfile, ...data }));
+		dispatch(
+			addBill({ id: crypto.randomUUID(), payer: selectedProfile, ...data })
+		);
 	};
 
 	return (
