@@ -7,11 +7,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Input from "../common/Input";
-import HomeIcon from "../assets/icons/HomeIcon";
 import ImageUpload from "../components/ImageUpload";
 import { useState } from "react";
 import dummyProfile from "../assets/images/dummyProfile.jpg";
-import { resetBill } from "../features/bill/billSlice";
 import Navbar from "../components/Navbar";
 
 const Profile = ({ isNew }) => {
@@ -55,9 +53,6 @@ const Profile = ({ isNew }) => {
 			<Navbar />
 			<form className="w-full my-10" onSubmit={handleSubmit(onSubmit)}>
 				<div className="flex flex-col items-center justify-center">
-					<div className="cursor-pointer" onClick={() => navigate("/")}>
-						<HomeIcon />
-					</div>
 					<ImageUpload
 						isNew={isNew}
 						currentProfileImg={currentProfileData[0]?.img}
@@ -100,10 +95,7 @@ const Profile = ({ isNew }) => {
 				</div>
 				<div className="flex justify-center my-10">
 					<div
-						onClick={() => {
-							dispatch(resetAll());
-							dispatch(resetBill());
-						}}
+						onClick={() => dispatch(resetAll())}
 						className="btn btn-wide bg-gray-500 flex">
 						Reset State
 					</div>

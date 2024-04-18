@@ -7,8 +7,6 @@ import { addBill } from "../features/bill/billSlice";
 import Navbar from "../components/Navbar";
 
 const Home = () => {
-	const [selectedProfile, setSelectedProfile] = useState({});
-
 	const dispatch = useDispatch();
 
 	const { control, handleSubmit } = useForm();
@@ -16,6 +14,8 @@ const Home = () => {
 	const profileData = useSelector((state) => state.profile);
 
 	const [profiles, setProfiles] = useState(profileData.data);
+
+	const [selectedProfile, setSelectedProfile] = useState(profiles[0]);
 
 	useEffect(() => {
 		setProfiles(profileData.data);
@@ -42,7 +42,7 @@ const Home = () => {
 
 	return (
 		<>
-			<Navbar />
+			<Navbar atHome />
 			<form onSubmit={handleSubmit(onSubmit)} className="my-10">
 				<div className="my-10">
 					<div className="flex w-full items-center flex-col gap-10">

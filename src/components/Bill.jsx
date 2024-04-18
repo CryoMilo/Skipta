@@ -6,24 +6,23 @@ import { useState } from "react";
 
 const Bill = ({ bill }) => {
 	const profiles = useSelector((state) => state.profile);
-
-	const payerRemovedList = profiles.data.filter(
-		(item) => item.id !== bill.payer.id
-	);
-
-	const [payeeList, setPayeelist] = useState(payerRemovedList);
-
 	const { control, handleSubmit, setValue } = useForm();
 
+	const [payeeList, setPayeelist] = useState(profiles.data);
+
 	const removePayee = (idToRemove, payeeCostToRemove) => {
-		const newList = payeeList?.filter((item) => item.id !== idToRemove);
 		setValue(`${payeeCostToRemove}_cost_for_${bill.id}`, undefined);
-		setPayeelist(newList);
+		setPayeelist(payeeList?.filter((item) => item.id !== idToRemove));
 	};
 
 	const onDivide = (data) => {
+		const dividedPrice = bill.amount / payeeList.length;
+
+		payeeList.forEach((payee) => {
+			setValue(`${payee.username}_cost_for_${bill.id}`, dividedPrice);
+		});
+
 		console.log(data);
-		console.log(payeeList);
 	};
 
 	return (
@@ -52,22 +51,24 @@ const Bill = ({ bill }) => {
 						control={control}
 					/>
 				</div>
-				{payeeList.map((payee) => (
-					<div
-						key={payee.id}
-						className="border-none grid grid-cols-[0.1fr_2fr_0.5fr] items-center my-4">
+				{payeeList
+					.filter((item) => item.id !== bill.payer.id)
+					.map((payee) => (
 						<div
-							onClick={() => removePayee(payee.id, payee.username)}
-							className="cursor-pointer">
-							<TrashIcon className="w-4 h-4 text-red-400" />
+							key={payee.id}
+							className="border-none grid grid-cols-[0.1fr_2fr_0.5fr] items-center my-4">
+							<div
+								onClick={() => removePayee(payee.id, payee.username)}
+								className="cursor-pointer">
+								<TrashIcon className="w-4 h-4 text-red-400" />
+							</div>
+							<div>{payee.username}</div>
+							<Input
+								name={`${payee.username}_cost_for_${bill.id}`}
+								control={control}
+							/>
 						</div>
-						<div>{payee.username}</div>
-						<Input
-							name={`${payee.username}_cost_for_${bill.id}`}
-							control={control}
-						/>
-					</div>
-				))}
+					))}
 			</div>
 		</form>
 	);

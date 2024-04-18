@@ -2,6 +2,7 @@ import { useState } from "react";
 import ImageUploading from "react-images-uploading";
 import dummyProfile from "../assets/images/dummyProfile.jpg";
 import EditIcon from "../assets/icons/EditIcon";
+import { PencilIcon } from "@heroicons/react/24/outline";
 
 const ImageUpload = ({ currentProfileImg, setNewUploadedImg, isNew }) => {
 	const [images, setImages] = useState([]);
@@ -34,11 +35,11 @@ const ImageUpload = ({ currentProfileImg, setNewUploadedImg, isNew }) => {
 											}
 										/>
 									</div>
-									<div
+
+									<PencilIcon
+										className="absolute rounded-full p-2 bg-primary right-2 bottom-1"
 										onClick={onImageUpload}
-										className="absolute rounded-full p-2 bg-primary right-2 bottom-1">
-										<EditIcon />
-									</div>
+									/>
 								</>
 							) : (
 								<>
