@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import Vouncher from "./pages/Vouncher";
 
 const router = createBrowserRouter([
 	{
@@ -16,12 +16,15 @@ const router = createBrowserRouter([
 		path: "/profile/edit/:id",
 		element: <Profile />,
 	},
+	{
+		path: "/vouncher",
+		element: <Vouncher />,
+	},
 ]);
 
 function App() {
 	return (
 		<div className="max-w-[800px] my-10 mx-auto px-8">
-			<Navbar />
 			<RouterProvider router={router} />
 		</div>
 	);

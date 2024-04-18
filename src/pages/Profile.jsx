@@ -12,6 +12,7 @@ import ImageUpload from "../components/ImageUpload";
 import { useState } from "react";
 import dummyProfile from "../assets/images/dummyProfile.jpg";
 import { resetBill } from "../features/bill/billSlice";
+import Navbar from "../components/Navbar";
 
 const Profile = ({ isNew }) => {
 	const { handleSubmit, control } = useForm();
@@ -50,62 +51,65 @@ const Profile = ({ isNew }) => {
 	};
 
 	return (
-		<form className="w-full my-10" onSubmit={handleSubmit(onSubmit)}>
-			<div className="flex flex-col items-center justify-center">
-				<div onClick={() => navigate("/")}>
-					<HomeIcon />
+		<>
+			<Navbar />
+			<form className="w-full my-10" onSubmit={handleSubmit(onSubmit)}>
+				<div className="flex flex-col items-center justify-center">
+					<div className="cursor-pointer" onClick={() => navigate("/")}>
+						<HomeIcon />
+					</div>
+					<ImageUpload
+						isNew={isNew}
+						currentProfileImg={currentProfileData[0]?.img}
+						setNewUploadedImg={setNewUploadedImg}
+					/>
+					<Input
+						control={control}
+						name="username"
+						type="text"
+						placeholder="What's your name?"
+						defaultValue={currentProfileData[0]?.username}
+					/>
 				</div>
-				<ImageUpload
-					isNew={isNew}
-					currentProfileImg={currentProfileData[0]?.img}
-					setNewUploadedImg={setNewUploadedImg}
-				/>
-				<Input
-					control={control}
-					name="username"
-					type="text"
-					placeholder="What's your name?"
-					defaultValue={currentProfileData[0]?.username}
-				/>
-			</div>
 
-			<div className="my-10 max-w-[400px] mx-auto">
-				<table className="table w-full my-10">
-					<thead className="text-center">
-						<tr className="border-none">
-							<th>Place</th>
-							<th>Amount</th>
-						</tr>
-					</thead>
-					<tbody className="text-center">
-						<tr className="border-none">
-							<th>Cy Ganderton</th>
-							<td>499</td>
-						</tr>
-						<tr className="border-none">
-							<th>Hart Hagerty</th>
-							<td>289</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div className="flex justify-center my-10">
-				<button type="submit" className="btn btn-wide bg-secondary flex">
-					{isNew ? "Add Yourself" : "Confirm"}
-				</button>
-			</div>
-			<div className="flex justify-center my-10">
-				<div
-					onClick={() => {
-						dispatch(resetAll());
-						dispatch(resetBill());
-					}}
-					className="btn btn-wide bg-gray-500 flex">
-					Reset State
+				<div className="my-10 max-w-[400px] mx-auto">
+					<table className="table w-full my-10">
+						<thead className="text-center">
+							<tr className="border-none">
+								<th>Place</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody className="text-center">
+							<tr className="border-none">
+								<th>Cy Ganderton</th>
+								<td>499</td>
+							</tr>
+							<tr className="border-none">
+								<th>Hart Hagerty</th>
+								<td>289</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-			</div>
-		</form>
+
+				<div className="flex justify-center my-10">
+					<button type="submit" className="btn btn-wide bg-secondary flex">
+						{isNew ? "Add Yourself" : "Confirm"}
+					</button>
+				</div>
+				<div className="flex justify-center my-10">
+					<div
+						onClick={() => {
+							dispatch(resetAll());
+							dispatch(resetBill());
+						}}
+						className="btn btn-wide bg-gray-500 flex">
+						Reset State
+					</div>
+				</div>
+			</form>
+		</>
 	);
 };
 
