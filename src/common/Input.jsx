@@ -21,7 +21,7 @@ const Input = ({
 					type={type}
 					defaultValue={defaultValue}
 					placeholder={placeholder}
-					className={`input text-center w-full max-w-xs border-b-2 border-b-secondary rounded-none ${className}`}
+					className={`text-center w-full max-w-xs border-b-2 border-b-secondary rounded-none outline-none p-2 focus:placeholder:invisible bg-transparent ${className}`}
 				/>
 			)}
 		/>
