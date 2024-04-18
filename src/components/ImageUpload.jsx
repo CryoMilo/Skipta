@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ImageUploading from "react-images-uploading";
 import dummyProfile from "../assets/images/dummyProfile.jpg";
-import EditIcon from "../assets/icons/EditIcon";
 import { PencilIcon } from "@heroicons/react/24/outline";
 
 const ImageUpload = ({ currentProfileImg, setNewUploadedImg, isNew }) => {
