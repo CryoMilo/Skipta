@@ -13,20 +13,22 @@ const Bill = ({ bill }) => {
 
 	const [payeeList, setPayeelist] = useState(payerRemovedList);
 
-	const { control, handleSubmit } = useForm();
+	const { control, handleSubmit, setValue } = useForm();
 
-	const removePayeeList = (idToRemove) => {
+	const removePayee = (idToRemove, payeeCostToRemove) => {
 		const newList = payeeList?.filter((item) => item.id !== idToRemove);
+		setValue(`${payeeCostToRemove}_cost_for_${bill.id}`, undefined);
 		setPayeelist(newList);
 	};
 
-	const onSubmit = (data) => {
+	const onDivide = (data) => {
 		console.log(data);
+		console.log(payeeList);
 	};
 
 	return (
 		<form
-			onSubmit={handleSubmit(onSubmit)}
+			onSubmit={handleSubmit(onDivide)}
 			className="my-10 max-w-[400px] mx-auto">
 			<div className="flex justify-between gap-10 border-b-primary border-b-[3px] py-3 my-5">
 				<div className="text-lg w-24 overflow-hidden whitespace-nowrap">
@@ -55,7 +57,7 @@ const Bill = ({ bill }) => {
 						key={payee.id}
 						className="border-none grid grid-cols-[0.1fr_2fr_0.5fr] items-center my-4">
 						<div
-							onClick={() => removePayeeList(payee.id)}
+							onClick={() => removePayee(payee.id, payee.username)}
 							className="cursor-pointer">
 							<TrashIcon className="w-4 h-4 text-red-400" />
 						</div>
