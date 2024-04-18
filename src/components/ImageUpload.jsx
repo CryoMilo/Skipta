@@ -36,7 +36,7 @@ const ImageUpload = ({ currentProfileImg, setNewUploadedImg, isNew }) => {
 									</div>
 
 									<PencilIcon
-										className="absolute rounded-full p-2 bg-primary right-2 bottom-1"
+										className="absolute rounded-full p-2 bg-primary right-2 bottom-1 w-8 h-8"
 										onClick={onImageUpload}
 									/>
 								</>
@@ -51,11 +51,11 @@ const ImageUpload = ({ currentProfileImg, setNewUploadedImg, isNew }) => {
 											}
 										/>
 									</div>
-									<div
+
+									<PencilIcon
+										className="absolute rounded-full p-2 bg-primary right-2 bottom-1 w-8 h-8"
 										onClick={() => onImageUpdate(0)}
-										className="absolute rounded-full p-2 bg-primary right-2 bottom-1">
-										<EditIcon />
-									</div>
+									/>
 								</>
 							)}
 						</div>
