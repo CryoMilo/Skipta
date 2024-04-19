@@ -9,7 +9,7 @@ const Navbar = ({ atHome }) => {
 	return (
 		<div className={`flex justify-between items-center `}>
 			<ChevronLeftIcon
-				className={`w-6 h-6 ${atHome && "invisible"}`}
+				className={`w-6 h-6 cursor-pointer ${atHome && "invisible"}`}
 				onClick={() => navigate("/")}
 			/>
 			<div className="flex gap-3 items-center">

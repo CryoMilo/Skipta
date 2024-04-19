@@ -1,44 +1,65 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Input from "../common/Input";
 import { useForm } from "react-hook-form";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { updateDivideEqualBill } from "../features/bill/billSlice";
+import { generateEqualIndividualCosts } from "../utils/generateEqualIndividualCosts";
 
 const Bill = ({ bill }) => {
 	const profiles = useSelector((state) => state.profile);
-	const { control, handleSubmit, setValue } = useForm();
+	const dispatch = useDispatch();
+	const { control, setValue, watch } = useForm({
+		defaultValues: {},
+	});
+
+	const allFields = watch();
+
+	console.log(allFields);
 
 	const [payeeList, setPayeelist] = useState(profiles.data);
+	const [individualCosts, setIndividualCosts] = useState({});
 
 	const removePayee = (idToRemove, payeeCostToRemove) => {
-		setValue(`${payeeCostToRemove}_cost_for_${bill.id}`, undefined);
+		setValue(`${payeeCostToRemove}`, undefined);
 		setPayeelist(payeeList?.filter((item) => item.id !== idToRemove));
 	};
 
-	const onDivide = (data) => {
-		const dividedPrice = bill.amount / payeeList.length;
+	// useEffect(() => {
+	// 	isEquallyDivided &&
+	// 		setIndividualCosts(generateEqualIndividualCosts(payeeList, bill.amount));
 
-		payeeList.forEach((payee) => {
-			setValue(`${payee.username}_cost_for_${bill.id}`, dividedPrice);
-		});
-
-		console.log(data);
-	};
+	// 	dispatch(
+	// 		updateDivideEqualBill({
+	// 			individualCosts,
+	// 			...bill,
+	// 		})
+	// 	);
+	// }, [payeeList]);
 
 	return (
-		<form
-			onSubmit={handleSubmit(onDivide)}
-			className="my-10 max-w-[400px] mx-auto">
+		<form className="my-10 max-w-[400px] mx-auto">
 			<div className="flex justify-between gap-10 border-b-primary border-b-[3px] py-3 my-5">
-				<div className="text-lg w-24 overflow-hidden whitespace-nowrap">
+				<div className="text-lg">
 					{bill.place} - {bill.amount}
 				</div>
-				<div>
-					<button
-						type="submit"
-						className="bg-secondary cursor-pointer rounded-md p-1">
+				<div className="flex gap-4">
+					<div
+						onClick={() => {
+							setIndividualCosts(
+								generateEqualIndividualCosts(payeeList, bill.amount)
+							);
+
+							dispatch(
+								updateDivideEqualBill({
+									individualCosts,
+									...bill,
+								})
+							);
+						}}
+						className={`bg-secondary cursor-pointer rounded-md p-1`}>
 						Divide
-					</button>
+					</div>
 				</div>
 			</div>
 			<div className="text-center">
@@ -46,8 +67,8 @@ const Bill = ({ bill }) => {
 					<div></div>
 					<div>{bill.payer.username}</div>
 					<Input
-						name={`${bill.payer.username}_cost_for_${bill.id}`}
-						defaultValue={bill.amount}
+						name={`${bill.payer.username}`}
+						defaultValue={individualCosts?.[bill.payer.username] || ""}
 						control={control}
 					/>
 				</div>
@@ -57,15 +78,15 @@ const Bill = ({ bill }) => {
 						<div
 							key={payee.id}
 							className="border-none grid grid-cols-[0.1fr_2fr_0.5fr] items-center my-4">
-							<div
+							<TrashIcon
+								className="w-4 h-4 text-red-400 cursor-pointer"
 								onClick={() => removePayee(payee.id, payee.username)}
-								className="cursor-pointer">
-								<TrashIcon className="w-4 h-4 text-red-400" />
-							</div>
+							/>
 							<div>{payee.username}</div>
 							<Input
-								name={`${payee.username}_cost_for_${bill.id}`}
+								name={`${payee.username}`}
 								control={control}
+								defaultValue={individualCosts?.[payee.username] || ""}
 							/>
 						</div>
 					))}
