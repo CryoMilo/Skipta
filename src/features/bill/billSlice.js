@@ -11,19 +11,32 @@ export const billSlice = createSlice({
 		addBill: (state, action) => {
 			state.data.push({ ...action.payload });
 		},
-		resetBill: (state) => {
+		resetBill: (state, action) => {
+			const { id } = action.payload || {};
+			state.data = state.data.map((bill) => {
+				if (bill.id === id) {
+					delete bill.individualCosts;
+				}
+				return bill;
+			});
+		},
+		resetVouncher: (state) => {
 			state.data = initialState.data;
 		},
-		updateDivideEqualBill: (state, action) => {
-			const { id, ...updatedFields } = action.payload;
-			const existingBill = state.data.find((bill) => bill.id === id);
-			if (existingBill) {
-				Object.assign(existingBill, updatedFields);
+		updateBill: (state, action) => {
+			const { id, individualCosts } = action.payload;
+			const existingBillIndex = state.data.findIndex((bill) => bill.id === id);
+
+			if (existingBillIndex !== -1) {
+				state.data[existingBillIndex].individualCosts = individualCosts;
 			}
+
+			return state;
 		},
 	},
 });
 
-export const { addBill, resetBill, updateDivideEqualBill } = billSlice.actions;
+export const { addBill, resetBill, updateBill, resetVouncher } =
+	billSlice.actions;
 
 export default billSlice.reducer;

@@ -1,7 +1,7 @@
-import Bill from "../components/Bill";
 import Navbar from "../components/Navbar";
 import { useSelector, useDispatch } from "react-redux";
-import { resetBill } from "../features/bill/billSlice";
+import { resetVouncher } from "../features/bill/billSlice";
+import BillSegment from "../components/BillSegment";
 
 const Vouncher = () => {
 	const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const Vouncher = () => {
 			)}
 			{billData?.data.map((bill) => (
 				<div key={bill.id}>
-					<Bill bill={bill} />
+					<BillSegment billId={bill.id} />
 				</div>
 			))}
 			<div className="flex gap-2 my-10 w-full max-w-[400px] mx-auto">
@@ -26,7 +26,7 @@ const Vouncher = () => {
 
 				<div className="w-1/2">
 					<button
-						onClick={() => dispatch(resetBill())}
+						onClick={() => dispatch(resetVouncher())}
 						className="btn bg-secondary w-full">
 						Reset
 					</button>
