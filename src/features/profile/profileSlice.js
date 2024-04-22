@@ -43,12 +43,18 @@ export const profileSlice = createSlice({
 				Object.assign(existingProfile, updatedFields);
 			}
 		},
+		deleteProfile: (state, action) => {
+			const { id } = action.payload;
+
+			state.data = state.data.filter((profile) => profile.id !== id);
+		},
 		resetAll: (state) => {
 			state.data = initialState.data;
 		},
 	},
 });
 
-export const { addProfile, resetAll, updateProfile } = profileSlice.actions;
+export const { addProfile, resetAll, updateProfile, deleteProfile } =
+	profileSlice.actions;
 
 export default profileSlice.reducer;

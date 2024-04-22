@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { addBill } from "../features/bill/billSlice";
 import Navbar from "../components/Navbar";
+import { resetAll } from "../features/profile/profileSlice";
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -84,6 +85,13 @@ const Home = () => {
 						<button type="submit" className="btn bg-secondary w-full">
 							Paid
 						</button>
+					</div>
+				</div>
+				<div className="flex justify-center my-10">
+					<div
+						onClick={() => dispatch(resetAll())}
+						className="btn btn-wide bg-gray-500 flex">
+						Reset State
 					</div>
 				</div>
 			</form>

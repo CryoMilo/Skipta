@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import {
 	addProfile,
-	resetAll,
+	deleteProfile,
 	updateProfile,
 } from "../features/profile/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,6 +48,15 @@ const Profile = ({ isNew }) => {
 		navigate("/");
 	};
 
+	const onDelete = () => {
+		navigate("/");
+		dispatch(
+			deleteProfile({
+				id: currentProfileData[0].id,
+			})
+		);
+	};
+
 	return (
 		<>
 			<Navbar />
@@ -88,17 +97,18 @@ const Profile = ({ isNew }) => {
 					</table>
 				</div>
 
-				<div className="flex justify-center my-10">
+				<div className="flex justify-center my-5">
 					<button type="submit" className="btn btn-wide bg-secondary flex">
 						{isNew ? "Add Yourself" : "Confirm"}
 					</button>
 				</div>
-				<div className="flex justify-center my-10">
-					<div
-						onClick={() => dispatch(resetAll())}
-						className="btn btn-wide bg-gray-500 flex">
-						Reset State
-					</div>
+				<div className="flex justify-center">
+					<button
+						onClick={onDelete}
+						type="button"
+						className="btn btn-wide bg-error flex">
+						Delete
+					</button>
 				</div>
 			</form>
 		</>
