@@ -13,7 +13,7 @@ const Navbar = ({ atHome }) => {
 				className={`w-6 h-6 cursor-pointer ${atHome && "hidden"}`}
 				onClick={() => navigate("/")}
 			/>
-			<div className="pl-5">
+			<div className="pl-12">
 				<MainLogo />
 			</div>
 			<div className="flex gap-3 items-center">

@@ -2,14 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Input from "../common/Input";
 import { useFieldArray, useForm } from "react-hook-form";
 import { TrashIcon } from "@heroicons/react/24/outline";
-import { updateBill } from "../features/bill/billSlice";
+import { deleteBill, updateBill } from "../features/bill/billSlice";
 import { generatePayeeFields } from "../utils/generatePayeeFields";
+import { useState } from "react";
 
 const BillSegment = ({ billId }) => {
 	const profiles = useSelector((state) => state.profile);
 	const billData = useSelector((state) => state.bill);
 
 	const currentBill = billData.data.filter((item) => item.id === billId);
+	const [isHovered, setIsHovered] = useState(false);
 
 	const bill = currentBill[0];
 
@@ -50,8 +52,20 @@ const BillSegment = ({ billId }) => {
 			onSubmit={handleSubmit(onSubmit)}
 			className={`my-10 max-w-[400px] mx-auto`}>
 			<div className="flex justify-between gap-10 border-b-primary border-b-[3px] py-3 mb-5">
-				<div className="text-lg">
-					{bill.place} - {bill.amount}
+				<div
+					className="text-lg flex items-center gap-3"
+					onMouseEnter={() => setIsHovered(true)}
+					onMouseLeave={() => setIsHovered(false)}>
+					{isHovered && (
+						<TrashIcon
+							onClick={() => dispatch(deleteBill(bill))}
+							className="w-5 h-5 mb-[2px] text-red-400 cursor-pointer"
+						/>
+					)}
+
+					<div>
+						{bill.place} - {bill.amount}
+					</div>
 				</div>
 				<div className="flex gap-4 items-center">
 					<div

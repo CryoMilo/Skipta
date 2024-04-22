@@ -33,10 +33,15 @@ export const billSlice = createSlice({
 
 			return state;
 		},
+		deleteBill: (state, action) => {
+			const { id } = action.payload;
+
+			state.data = state.data.filter((bill) => bill.id !== id);
+		},
 	},
 });
 
-export const { addBill, resetBill, updateBill, resetVouncher } =
+export const { addBill, resetBill, updateBill, resetVouncher, deleteBill } =
 	billSlice.actions;
 
 export default billSlice.reducer;
