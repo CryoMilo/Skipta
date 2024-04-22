@@ -102,14 +102,16 @@ const Profile = ({ isNew }) => {
 						{isNew ? "Add Yourself" : "Confirm"}
 					</button>
 				</div>
-				<div className="flex justify-center">
-					<button
-						onClick={onDelete}
-						type="button"
-						className="btn btn-wide bg-error flex">
-						Delete
-					</button>
-				</div>
+				{!isNew && (
+					<div className="flex justify-center">
+						<button
+							onClick={onDelete}
+							type="button"
+							className="btn btn-wide bg-error flex">
+							Delete
+						</button>
+					</div>
+				)}
 			</form>
 		</>
 	);
