@@ -10,6 +10,7 @@
 export const generatePayeeFields = (payeeList) => {
 	return payeeList.map((payee) => {
 		return {
+			id: payee.id,
 			username: payee.username,
 			cost: parseInt(payee.cost) || 0,
 		};

@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Vouncher from "./pages/Vouncher";
+import Settle from "./pages/Settle";
 
 const router = createBrowserRouter([
 	{
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
 	{
 		path: "/vouncher",
 		element: <Vouncher />,
+	},
+	{
+		path: "/settle",
+		element: <Settle />,
 	},
 ]);
 
