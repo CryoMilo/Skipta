@@ -6,7 +6,7 @@ const initialState = {
 			id: crypto.randomUUID(),
 			username: "John",
 			img: "https://i.pinimg.com/736x/50/d5/1d/50d51d96839a9463bd261404134acd1d.jpg",
-			active: true,
+			active: false,
 		},
 		{
 			id: crypto.randomUUID(),

@@ -16,7 +16,7 @@ const Home = () => {
 
 	const [profiles, setProfiles] = useState(profileData.data);
 
-	const [selectedProfile, setSelectedProfile] = useState(profiles[0]);
+	const [selectedProfile, setSelectedProfile] = useState();
 
 	useEffect(() => {
 		setProfiles(profileData.data);
@@ -77,9 +77,12 @@ const Home = () => {
 					</a>
 				</div>
 				<div className="flex gap-2 my-10 w-full max-w-[400px] mx-auto">
-					<a href={`/profile/edit/${selectedProfile.id}`} className="w-1/2">
-						<div className="btn bg-primary w-full">Edit</div>
-					</a>
+					<button
+						disabled={profiles.every((element) => element.active === false)}
+						type="button"
+						className="btn bg-primary w-1/2">
+						<a href={`/profile/edit/${selectedProfile?.id}`}>Edit</a>
+					</button>
 
 					<div className="w-1/2">
 						<button type="submit" className="btn bg-secondary w-full">
