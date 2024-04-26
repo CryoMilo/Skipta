@@ -25,7 +25,7 @@ const BillSegment = ({ billId }) => {
 			: payeeList
 	);
 
-	const { control, handleSubmit } = useForm({
+	const { control, handleSubmit, reset } = useForm({
 		defaultValues: {
 			individualCosts: defaultFields,
 		},
@@ -45,6 +45,19 @@ const BillSegment = ({ billId }) => {
 				individualCosts: data.individualCosts,
 			})
 		);
+	};
+
+	const calculateEvenSplit = () => {
+		const totalPayees = fields.length;
+		const totalAmount = parseFloat(bill.amount);
+		const individualAmount = totalAmount / totalPayees;
+
+		reset({
+			individualCosts: defaultFields.map((payee) => ({
+				...payee,
+				cost: individualAmount.toFixed(1),
+			})),
+		});
 	};
 
 	return (
@@ -69,6 +82,7 @@ const BillSegment = ({ billId }) => {
 				</div>
 				<div className="flex gap-4 items-center">
 					<div
+						onClick={() => calculateEvenSplit()}
 						type="button"
 						className={`bg-secondary cursor-pointer rounded-md p-1`}>
 						Divide
@@ -83,10 +97,14 @@ const BillSegment = ({ billId }) => {
 					<div
 						key={payee.id}
 						className="border-none grid grid-cols-[0.1fr_2fr_0.5fr] items-center my-4">
-						<TrashIcon
-							className="w-4 h-4 text-red-400 cursor-pointer"
-							onClick={() => remove(index)}
-						/>
+						{bill.payer.username !== payee.username ? (
+							<TrashIcon
+								className="w-4 h-4 text-red-400 cursor-pointer"
+								onClick={() => remove(index)}
+							/>
+						) : (
+							<div></div>
+						)}
 						<div>{payee.username}</div>
 						<Input
 							type="number"
