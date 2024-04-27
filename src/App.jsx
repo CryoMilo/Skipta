@@ -29,7 +29,7 @@ const router = createBrowserRouter([
 
 function App() {
 	return (
-		<div className="max-w-[800px] my-10 mx-auto px-8">
+		<div className="max-w-[800px] py-10 mx-auto">
 			<RouterProvider router={router} />
 		</div>
 	);

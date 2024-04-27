@@ -1,9 +1,25 @@
+import { useState } from "react";
+
 export const ThemeController = () => {
+	const [theme, setTheme] = useState(() => {
+		return localStorage.getItem("theme") || "bumblebee";
+	});
+
+	const toggleTheme = () => {
+		const newTheme = theme === "bumblebee" ? "dracula" : "bumblebee";
+		setTheme(newTheme);
+		localStorage.setItem("theme", newTheme);
+	};
+
 	return (
 		<>
 			<label className="swap swap-rotate">
-				<input type="checkbox" className="theme-controller" value="dracula" />
-
+				<input
+					type="checkbox"
+					className="theme-controller"
+					value="dracula"
+					onClick={toggleTheme}
+				/>
 				<svg
 					className="swap-off fill-current w-6 h-6"
 					xmlns="http://www.w3.org/2000/svg"

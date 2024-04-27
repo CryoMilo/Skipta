@@ -8,7 +8,7 @@ const Navbar = ({ atHome }) => {
 	const navigate = useNavigate();
 
 	return (
-		<div className={`flex justify-between items-center`}>
+		<div className={`flex justify-between items-center px-4`}>
 			<ChevronLeftIcon
 				className={`w-6 h-6 cursor-pointer ${atHome && "hidden"}`}
 				onClick={() => navigate("/")}
