@@ -3,7 +3,6 @@ import profileSlice from "../features/profile/profileSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import billSlice from "../features/bill/billSlice";
-import themeSlice from "../features/theme/themeSlice";
 
 const persistConfig = {
 	key: "root",
@@ -13,7 +12,6 @@ const persistConfig = {
 const rootReducer = combineReducers({
 	profile: profileSlice,
 	bill: billSlice,
-	theme: themeSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
