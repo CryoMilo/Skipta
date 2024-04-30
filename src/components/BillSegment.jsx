@@ -25,7 +25,7 @@ const BillSegment = ({ billId }) => {
 			: payeeList
 	);
 
-	const { control, handleSubmit, reset } = useForm({
+	const { control, handleSubmit, reset, watch } = useForm({
 		defaultValues: {
 			individualCosts: defaultFields,
 		},
@@ -35,12 +35,26 @@ const BillSegment = ({ billId }) => {
 		name: "individualCosts",
 	});
 
+	const watchedFields = watch().individualCosts;
+
+	// const checkAmountExceeding = () => {
+	let currentTotal;
+
+	for (let i = 0; i < watchedFields.length; i++) {
+		currentTotal += watchedFields[i].cost;
+	}
+
+	console.log(currentTotal);
+
+	// 	console.log(currentTotal);
+	// };
+
 	const onSubmit = (data) => {
 		dispatch(
 			updateBill({
 				id: bill.id,
 				payer: bill.payer,
-				amount: bill.amount,
+				amount: parseFloat(bill.amount),
 				place: bill.place,
 				individualCosts: data.individualCosts,
 			})
@@ -53,7 +67,7 @@ const BillSegment = ({ billId }) => {
 		const individualAmount = totalAmount / totalPayees;
 
 		reset({
-			individualCosts: defaultFields.map((payee) => ({
+			individualCosts: fields.map((payee) => ({
 				...payee,
 				cost: individualAmount.toFixed(1),
 			})),
@@ -76,9 +90,7 @@ const BillSegment = ({ billId }) => {
 						/>
 					)}
 
-					<div>
-						{bill.place} - {bill.amount}
-					</div>
+					<div>{bill.place}</div>
 				</div>
 				<div className="flex gap-4 items-center">
 					<div
@@ -91,6 +103,8 @@ const BillSegment = ({ billId }) => {
 					<button type="submit">Save</button>
 				</div>
 			</div>
+
+			<p>Amount Due - {bill.amount}</p>
 
 			<div className="text-center">
 				{fields.map((payee, index) => (
