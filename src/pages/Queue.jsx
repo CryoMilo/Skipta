@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import QueueNavbar from "../components/QueueNavbar";
-import { resetAll, updateQueue } from "../features/queue/queueSlice";
+import { deleteQueue, updateQueue } from "../features/queue/queueSlice";
 import { HtaminnThope, MontPhatThope } from "../constants/marketConstants";
 
 const Queue = () => {
@@ -34,19 +34,21 @@ const Queue = () => {
 							</h2>
 							<table className="table w-full my-10">
 								<tbody className="text-center">
-									<tr className="border-none">
-										<th>Spice Level</th>
-										<td>
-											<input
-												type="range"
-												min={0}
-												max="2"
-												disabled
-												value={String(item.mainDishSpiceLvl)}
-												className="range range-primary"
-											/>
-										</td>
-									</tr>
+									{item.menuName === MontPhatThope && (
+										<tr className="border-none">
+											<th>Spice Level</th>
+											<td>
+												<input
+													type="range"
+													min={0}
+													max="2"
+													disabled
+													value={String(item.mainDishSpiceLvl)}
+													className="range range-primary"
+												/>
+											</td>
+										</tr>
+									)}
 									<tr className="border-none">
 										<th>Soup</th>
 										<td>{item.soup === true ? "Yes" : "No"}</td>
@@ -80,7 +82,12 @@ const Queue = () => {
 									)}
 								</tbody>
 							</table>
-							<div className="card-actions justify-end">
+							<div className="card-actions justify-between">
+								<button
+									onClick={() => dispatch(deleteQueue(item))}
+									className="btn btn-error">
+									Delete
+								</button>
 								{item.orderCompleted ? (
 									<button disabled className="btn btn-primary disabled">
 										Completed
@@ -97,14 +104,6 @@ const Queue = () => {
 					</div>
 				);
 			})}
-
-			<div className="flex justify-center my-10">
-				<div
-					onClick={() => dispatch(resetAll())}
-					className="btn btn-wide bg-gray-500 flex">
-					Reset State
-				</div>
-			</div>
 		</div>
 	);
 };

@@ -2,9 +2,9 @@ import { ChevronLeftIcon } from "@heroicons/react/16/solid";
 import { ThemeController } from "../common/ThemeController";
 import { useNavigate } from "react-router-dom";
 import MainLogo from "../assets/icons/MainLogo";
-import { ReceiptRefundIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 
-const QueueNavbar = ({ atHome }) => {
+const OrderNavbar = ({ atHome }) => {
 	const navigate = useNavigate();
 
 	return (
@@ -13,19 +13,16 @@ const QueueNavbar = ({ atHome }) => {
 				className={`w-6 h-6 cursor-pointer ${atHome && "hidden"}`}
 				onClick={() => navigate("/")}
 			/>
-			{/* <div className="pl-12"> */}
-			<MainLogo />
-			{/* </div> */}
-			<div className="flex gap-3 items-center">
-				<ThemeController />
 
-				<ReceiptRefundIcon
-					className="w-6 h-6 cursor-pointer"
-					onClick={() => navigate("/order")}
-				/>
+			<MainLogo />
+
+			<div className="flex gap-3 items-center">
+				<ArrowLeftCircleIcon />
+
+				<ThemeController />
 			</div>
 		</div>
 	);
 };
 
-export default QueueNavbar;
+export default OrderNavbar;
