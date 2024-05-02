@@ -7,6 +7,7 @@ import OrderNavbar from "../components/OrderNavbar";
 
 import img1 from "../../src/assets/images/img1.png";
 import img2 from "../../src/assets/images/img2.png";
+import paymentQR from "../../src/assets/images/paymentQR.jpg";
 
 const Order = () => {
 	return (
@@ -54,11 +55,6 @@ const MokePhatThope = () => {
 					<p className="w-full my-4 text-center font-bold text-xl">
 						{MontPhatThope}
 					</p>
-
-					<div className="w-full pl-10 my-5">
-						<label>Name</label>
-						<Input name="buyerName" control={control} />
-					</div>
 
 					{/* Main Dish spice lvl*/}
 					<div>
@@ -133,6 +129,16 @@ const MokePhatThope = () => {
 						</label>
 					</div>
 
+					<div className="w-full pl-10 my-5">
+						<label>Name</label>
+						<Input name="buyerName" control={control} />
+					</div>
+
+					<div className="mt-10">
+						<h3 className="text-center">Pay Here</h3>
+						<img className="p-8" src={paymentQR} alt="payment" />
+					</div>
+
 					<div className="modal-action">
 						<form method="dialog">
 							<button className="btn">Close</button>
@@ -182,11 +188,6 @@ const HtaMinThope = () => {
 						{HtaminnThope}
 					</p>
 
-					<div className="w-full pl-10 my-5">
-						<label>Name</label>
-						<Input name="buyerName" control={control} />
-					</div>
-
 					{/* checkboxes */}
 					<div>
 						<div className="form-control">
@@ -225,6 +226,16 @@ const HtaMinThope = () => {
 								<span>Level 2</span>
 							</div>
 						</label>
+					</div>
+
+					<div className="w-full pl-10 my-5">
+						<label>Name</label>
+						<Input name="buyerName" control={control} />
+					</div>
+
+					<div className="mt-10">
+						<h3 className="text-center">Pay Here</h3>
+						<img className="p-8" src={paymentQR} alt="payment" />
 					</div>
 
 					<div className="modal-action">
