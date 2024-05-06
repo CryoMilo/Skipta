@@ -35,6 +35,14 @@ const BillSegment = ({ billId }) => {
 		name: "individualCosts",
 	});
 
+	// const calculateTotalAmountDue = () => {
+	// 	let total = 0;
+	// 	for (const payee of bill.individualCosts) {
+	// 		total += parseInt(payee.cost);
+	// 	}
+	// 	setTotalAmountDue(total.toFixed(2));
+	// };
+
 	const onSubmit = (data) => {
 		dispatch(
 			updateBill({
@@ -42,7 +50,7 @@ const BillSegment = ({ billId }) => {
 				payer: bill.payer,
 				amount: bill.amount,
 				place: bill.place,
-				individualCosts: data.individualCosts,
+				individualCosts: parseFloat(data.individualCosts),
 			})
 		);
 	};
@@ -55,7 +63,7 @@ const BillSegment = ({ billId }) => {
 		reset({
 			individualCosts: fields.map((payee) => ({
 				...payee,
-				cost: individualAmount.toFixed(1),
+				cost: individualAmount.toFixed(2),
 			})),
 		});
 	};

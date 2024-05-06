@@ -12,7 +12,7 @@ export const generatePayeeFields = (payeeList) => {
 		return {
 			id: payee.id,
 			username: payee.username,
-			cost: parseInt(payee.cost) || 0,
+			cost: payee.cost || 0,
 		};
 	});
 };

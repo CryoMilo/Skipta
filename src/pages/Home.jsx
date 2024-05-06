@@ -3,7 +3,7 @@ import Avatar from "../common/Avatar";
 import Input from "../common/Input";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { addBill } from "../features/bill/billSlice";
+import { addBill, resetVouncher } from "../features/bill/billSlice";
 import Navbar from "../components/Navbar";
 import { resetAll } from "../features/profile/profileSlice";
 
@@ -95,6 +95,13 @@ const Home = () => {
 						onClick={() => dispatch(resetAll())}
 						className="btn btn-wide bg-gray-500 flex">
 						Reset State
+					</div>
+				</div>
+				<div className="flex justify-center my-10">
+					<div
+						onClick={() => dispatch(resetVouncher())}
+						className="btn btn-wide bg-gray-500 flex">
+						Reset Vouncher
 					</div>
 				</div>
 			</form>
