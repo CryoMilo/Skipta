@@ -53,7 +53,7 @@ const BillSegment = ({ billId }) => {
 		const individualAmount = totalAmount / totalPayees;
 
 		reset({
-			individualCosts: defaultFields.map((payee) => ({
+			individualCosts: fields.map((payee) => ({
 				...payee,
 				cost: individualAmount.toFixed(1),
 			})),
