@@ -30,18 +30,11 @@ const BillSegment = ({ billId }) => {
 			individualCosts: defaultFields,
 		},
 	});
+
 	const { fields, remove } = useFieldArray({
 		control,
 		name: "individualCosts",
 	});
-
-	// const calculateTotalAmountDue = () => {
-	// 	let total = 0;
-	// 	for (const payee of bill.individualCosts) {
-	// 		total += parseInt(payee.cost);
-	// 	}
-	// 	setTotalAmountDue(total.toFixed(2));
-	// };
 
 	const onSubmit = (data) => {
 		dispatch(
@@ -50,14 +43,14 @@ const BillSegment = ({ billId }) => {
 				payer: bill.payer,
 				amount: bill.amount,
 				place: bill.place,
-				individualCosts: parseFloat(data.individualCosts),
+				individualCosts: data.individualCosts,
 			})
 		);
 	};
 
 	const calculateEvenSplit = () => {
 		const totalPayees = fields.length;
-		const totalAmount = parseFloat(bill.amount);
+		const totalAmount = bill.amount;
 		const individualAmount = totalAmount / totalPayees;
 
 		reset({
