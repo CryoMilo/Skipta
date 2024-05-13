@@ -6,11 +6,19 @@ import { useForm } from "react-hook-form";
 import { addBill, resetVouncher } from "../features/bill/billSlice";
 import Navbar from "../components/Navbar";
 import { resetAll } from "../features/profile/profileSlice";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { billRegisterationSchema } from "../utils/validationSchemas";
 
 const Home = () => {
 	const dispatch = useDispatch();
 
-	const { control, handleSubmit } = useForm();
+	const { control, handleSubmit } = useForm({
+		defaultValues: {
+			place: "",
+			amout: 0,
+		},
+		resolver: yupResolver(billRegisterationSchema),
+	});
 
 	const profileData = useSelector((state) => state.profile);
 
