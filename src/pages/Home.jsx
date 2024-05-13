@@ -85,7 +85,10 @@ const Home = () => {
 					</button>
 
 					<div className="w-1/2">
-						<button type="submit" className="btn bg-secondary w-full">
+						<button
+							disabled={profiles.every((element) => element.active === false)}
+							type="submit"
+							className="btn bg-secondary w-full">
 							Paid
 						</button>
 					</div>

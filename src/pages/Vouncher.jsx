@@ -24,7 +24,6 @@ const Vouncher = () => {
 			<div className="flex gap-2 my-10 w-full max-w-[400px] mx-auto">
 				<div className="w-1/2">
 					<button
-						disabled={billData.data.length === 0}
 						onClick={() => navigate("/settle")}
 						className="btn bg-primary w-full">
 						Calculate
