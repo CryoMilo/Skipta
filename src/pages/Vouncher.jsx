@@ -3,11 +3,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { resetVouncher } from "../features/bill/billSlice";
 import BillSegment from "../components/BillSegment";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Vouncher = () => {
 	const dispatch = useDispatch();
 	const billData = useSelector((state) => state.bill);
 	const navigate = useNavigate();
+
+	const [isBillExists, setBillExists] = useState(false);
+
+	useEffect(() => {
+		const hasAllIndividualCosts = billData.data.some(
+			(bill) => !bill.individualCosts || bill.individualCosts.length === 0
+		);
+		setBillExists(hasAllIndividualCosts);
+	}, [billData.data]);
 
 	return (
 		<>
@@ -24,6 +34,7 @@ const Vouncher = () => {
 			<div className="flex gap-2 my-10 w-full max-w-[400px] mx-auto">
 				<div className="w-1/2">
 					<button
+						disabled={isBillExists}
 						onClick={() => navigate("/settle")}
 						className="btn bg-primary w-full">
 						Calculate
