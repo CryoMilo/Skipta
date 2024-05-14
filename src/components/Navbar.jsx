@@ -22,7 +22,7 @@ const Navbar = () => {
 				className={`w-6 h-6 cursor-pointer ${pathname === "/" && "hidden"}`}
 				onClick={handleBack}
 			/>
-			<div className="pl-12">
+			<div className="cursor-pointer" onClick={() => navigate("/")}>
 				<MainLogo />
 			</div>
 			<div className="flex gap-3 items-center">
