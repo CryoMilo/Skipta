@@ -8,11 +8,19 @@ const Navbar = () => {
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
 
+	const handleBack = () => {
+		if (location.pathname !== "/") {
+			navigate(-1);
+		} else {
+			navigate("/");
+		}
+	};
+
 	return (
 		<div className={`flex justify-between items-center px-4`}>
 			<ChevronLeftIcon
 				className={`w-6 h-6 cursor-pointer ${pathname === "/" && "hidden"}`}
-				onClick={() => navigate("/")}
+				onClick={handleBack}
 			/>
 			<div className="pl-12">
 				<MainLogo />
