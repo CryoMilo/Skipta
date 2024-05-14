@@ -28,10 +28,12 @@ const Navbar = () => {
 			<div className="flex gap-3 items-center">
 				<ThemeController />
 
-				<ReceiptRefundIcon
-					className="w-6 h-6 cursor-pointer"
-					onClick={() => navigate("/vouncher")}
-				/>
+				{pathname !== "/voucher" && (
+					<ReceiptRefundIcon
+						className="w-6 h-6 cursor-pointer"
+						onClick={() => navigate("/voucher")}
+					/>
+				)}
 			</div>
 		</div>
 	);

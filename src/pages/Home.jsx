@@ -112,7 +112,7 @@ const Home = () => {
 					<div
 						onClick={() => dispatch(resetVouncher())}
 						className="btn btn-wide bg-gray-500 flex">
-						Reset Vouncher
+						Reset Voucher
 					</div>
 				</div>
 			</form>

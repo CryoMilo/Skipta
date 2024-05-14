@@ -4,7 +4,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { deleteBill, updateBill } from "../features/bill/billSlice";
 import { generatePayeeFields } from "../utils/generatePayeeFields";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const BillSegment = ({ billId }) => {
 	const profiles = useSelector((state) => state.profile);
@@ -12,6 +12,7 @@ const BillSegment = ({ billId }) => {
 
 	const currentBill = billData.data.filter((item) => item.id === billId);
 	const [isHovered, setIsHovered] = useState(false);
+	const [subTotal, setSubTotal] = useState(0);
 
 	const bill = currentBill[0];
 
@@ -25,11 +26,21 @@ const BillSegment = ({ billId }) => {
 			: payeeList
 	);
 
-	const { control, handleSubmit, reset } = useForm({
+	const { control, handleSubmit, reset, watch } = useForm({
 		defaultValues: {
 			individualCosts: defaultFields,
 		},
 	});
+
+	const costValues = watch().individualCosts.map((item) => item.cost);
+
+	useEffect(() => {
+		let totalCost = 0;
+		for (const individualCost of watch().individualCosts) {
+			totalCost += parseInt(individualCost.cost);
+		}
+		setSubTotal(totalCost);
+	}, [costValues, watch]);
 
 	const { fields, remove } = useFieldArray({
 		control,
@@ -81,17 +92,29 @@ const BillSegment = ({ billId }) => {
 						{bill.place} - {bill.amount}
 					</div>
 				</div>
+
 				<div className="flex gap-4 items-center">
 					<div
 						onClick={() => calculateEvenSplit()}
 						type="button"
-						className={`bg-secondary cursor-pointer rounded-md p-1`}>
+						className="btn btn-secondary btn-sm">
 						Divide
 					</div>
 
-					<button type="submit">Save</button>
+					<button
+						className="btn btn-primary py-0 btn-sm"
+						disabled={subTotal > bill.amount}
+						type="submit">
+						Save
+					</button>
 				</div>
 			</div>
+
+			{subTotal > bill.amount && (
+				<p className="text-sm text-error">
+					Divided value is exceeding the total amount
+				</p>
+			)}
 
 			<div className="text-center">
 				{fields.map((payee, index) => (

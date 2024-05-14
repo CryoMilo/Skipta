@@ -5,7 +5,7 @@ import BillSegment from "../components/BillSegment";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const Vouncher = () => {
+const Voucher = () => {
 	const dispatch = useDispatch();
 	const billData = useSelector((state) => state.bill);
 	const navigate = useNavigate();
@@ -22,9 +22,9 @@ const Vouncher = () => {
 	return (
 		<>
 			<Navbar />
-			<h3 className="text-center mt-10 text-xl">Vouncher</h3>
+			<h3 className="text-center mt-10 text-xl">Voucher</h3>
 			{billData.data.length === 0 && (
-				<p className="text-center my-11">No Vouncher to resolve yet</p>
+				<p className="text-center my-11">No Voucher to resolve yet</p>
 			)}
 			{billData?.data.map((bill) => (
 				<div key={bill.id}>
@@ -54,4 +54,4 @@ const Vouncher = () => {
 	);
 };
 
-export default Vouncher;
+export default Voucher;

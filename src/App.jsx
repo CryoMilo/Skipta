@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import Vouncher from "./pages/Vouncher";
+import Voucher from "./pages/Voucher";
 import Settle from "./pages/Settle";
 
 const router = createBrowserRouter([
@@ -18,8 +18,8 @@ const router = createBrowserRouter([
 		element: <Profile />,
 	},
 	{
-		path: "/vouncher",
-		element: <Vouncher />,
+		path: "/voucher",
+		element: <Voucher />,
 	},
 	{
 		path: "/settle",
