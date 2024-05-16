@@ -15,18 +15,16 @@ const Settle = () => {
 		setTransactions(settlePayments(billDataCopy));
 	}, []);
 
-	console.log(bills.data[0].payer);
-
 	return (
 		<>
 			<Navbar />
-			<section className="my-10 max-w-[600px] mx-auto">
+			<section className="my-10 max-w-[600px] mx-auto px-10">
 				{transactions?.map(({ payer, receiver, cost }, index) => {
 					return (
 						<div
 							key={index}
 							tabIndex={index}
-							className="collapse border rounded-md my-10 bg-secondary text-black border-none shadow-xl">
+							className="collapse border rounded-md my-10 bg-gradient-to-tr from-violet-500 to-orange-300 text-black border-none shadow-xl">
 							<div className="collapse-title text-lg font-medium px-5">
 								<div className="grid grid-cols-3 justify-items-center">
 									{payer} <ArrowLongRightIcon className="w-5" /> {receiver}
@@ -37,11 +35,31 @@ const Settle = () => {
 								</p>
 							</div>
 							<div className="collapse-content">
-								<img
-									className="rounded-lg"
-									src={bills.data[0].payer.bankQRCode}
-									alt="Payment QR"
-								/>
+								<div className="my-10 max-w-[400px] mx-auto">
+									<table className="table w-full my-10">
+										<tbody className="text-center">
+											<tr className="border-none">
+												<th>Account Number</th>
+												<td>{bills.data[0].payer.bankAccountNumber}</td>
+											</tr>
+											<tr className="border-none">
+												<th>Account Name</th>
+												<td>{bills.data[0].payer.bankAccountName}</td>
+											</tr>
+											<tr className="border-none">
+												<th>Bank Name</th>
+												<td>{bills.data[0].payer.bankName}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								{bills.data[0].payer.bankQRCode && (
+									<img
+										className="rounded-lg"
+										src={bills.data[0].payer.bankQRCode}
+										alt="Payment QR"
+									/>
+								)}
 							</div>
 						</div>
 					);

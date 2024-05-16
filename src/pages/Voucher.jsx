@@ -31,7 +31,7 @@ const Voucher = () => {
 					<BillSegment billId={bill.id} />
 				</div>
 			))}
-			<div className="flex gap-2 my-10 w-full max-w-[400px] mx-auto">
+			<div className="flex gap-2 my-10 w-full max-w-[400px] mx-auto px-5">
 				<div className="w-1/2">
 					<button
 						disabled={isBillExists}

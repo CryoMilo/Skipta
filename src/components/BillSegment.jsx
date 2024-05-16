@@ -75,7 +75,7 @@ const BillSegment = ({ billId }) => {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className={`my-10 max-w-[400px] mx-auto`}>
+			className={`my-10 max-w-[400px] mx-auto px-5`}>
 			<div className="flex justify-between gap-10 border-b-primary border-b-[3px] py-3 mb-5">
 				<div
 					className="text-lg flex items-center gap-3"
