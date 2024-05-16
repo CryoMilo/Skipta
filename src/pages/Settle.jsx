@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import { settlePayments } from "../utils/settlePayments";
 import { ArrowLongRightIcon } from "@heroicons/react/20/solid";
-import paymentQR from "../assets/images/paymentQR.jpg";
 
 const Settle = () => {
 	const bills = useSelector((state) => state.bill);
@@ -15,6 +14,8 @@ const Settle = () => {
 	useEffect(() => {
 		setTransactions(settlePayments(billDataCopy));
 	}, []);
+
+	console.log(bills.data[0].payer);
 
 	return (
 		<>
@@ -36,7 +37,11 @@ const Settle = () => {
 								</p>
 							</div>
 							<div className="collapse-content">
-								<img className="rounded-lg" src={paymentQR} alt="Payment QR" />
+								<img
+									className="rounded-lg"
+									src={bills.data[0].payer.bankQRCode}
+									alt="Payment QR"
+								/>
 							</div>
 						</div>
 					);
