@@ -15,6 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { profileRegisterSchema } from "../utils/validationSchemas";
 import QRUpload from "../components/QRUpload";
 import Loader from "../common/Loader";
+import { toast } from "react-toastify";
 
 const Profile = ({ isNew }) => {
 	const [newUploadedImg, setNewUploadedImg] = useState();
@@ -55,6 +56,7 @@ const Profile = ({ isNew }) => {
 					bankQRCode: newUploadedQR,
 				})
 			);
+			toast.success("Profile Added!");
 		} else
 			dispatch(
 				updateProfile({
@@ -68,6 +70,7 @@ const Profile = ({ isNew }) => {
 					bankQRCode: currentProfileData[0].bankQRCode || newUploadedQR,
 				})
 			);
+		toast.success("Profile Updated!");
 		navigate("/");
 	};
 

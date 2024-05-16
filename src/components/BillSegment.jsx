@@ -5,6 +5,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { deleteBill, updateBill } from "../features/bill/billSlice";
 import { generatePayeeFields } from "../utils/generatePayeeFields";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const BillSegment = ({ billId }) => {
 	const profiles = useSelector((state) => state.profile);
@@ -57,6 +58,7 @@ const BillSegment = ({ billId }) => {
 				individualCosts: data.individualCosts,
 			})
 		);
+		toast.success("Bill Saved!");
 	};
 
 	const calculateEvenSplit = () => {
@@ -83,7 +85,10 @@ const BillSegment = ({ billId }) => {
 					onMouseLeave={() => setIsHovered(false)}>
 					{isHovered && (
 						<TrashIcon
-							onClick={() => dispatch(deleteBill(bill))}
+							onClick={() => {
+								dispatch(deleteBill(bill));
+								toast.error("Bill Deleted!");
+							}}
 							className="w-5 h-5 mb-[2px] text-red-400 cursor-pointer"
 						/>
 					)}

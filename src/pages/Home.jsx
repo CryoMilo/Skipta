@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import { resetAll } from "../features/profile/profileSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { billRegisterationSchema } from "../utils/validationSchemas";
+import { toast } from "react-toastify";
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const Home = () => {
 		dispatch(
 			addBill({ id: crypto.randomUUID(), payer: selectedProfile, ...data })
 		);
+		toast.success("Bill Added Successfully!");
 	};
 
 	return (

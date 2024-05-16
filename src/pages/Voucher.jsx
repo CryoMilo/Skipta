@@ -4,6 +4,7 @@ import { resetVouncher } from "../features/bill/billSlice";
 import BillSegment from "../components/BillSegment";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Voucher = () => {
 	const dispatch = useDispatch();
@@ -44,7 +45,10 @@ const Voucher = () => {
 				<div className="w-1/2">
 					<button
 						type="button"
-						onClick={() => dispatch(resetVouncher())}
+						onClick={() => {
+							dispatch(resetVouncher());
+							toast.error("Voucher Deleted!");
+						}}
 						className="btn bg-secondary w-full">
 						Reset
 					</button>
