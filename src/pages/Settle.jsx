@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import { settlePayments } from "../utils/settlePayments";
 import { ArrowLongRightIcon } from "@heroicons/react/20/solid";
+import ReceiverBankQRCode from "../components/ReceiverBankQRCode";
 
 const Settle = () => {
 	const bills = useSelector((state) => state.bill);
@@ -53,13 +54,7 @@ const Settle = () => {
 										</tbody>
 									</table>
 								</div>
-								{bills.data[0].payer.bankQRCode && (
-									<img
-										className="rounded-lg"
-										src={bills.data[0].payer.bankQRCode}
-										alt="Payment QR"
-									/>
-								)}
+								<ReceiverBankQRCode receiver={receiver} />
 							</div>
 						</div>
 					);
