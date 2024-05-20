@@ -74,10 +74,13 @@ const Home = () => {
 				<p className="text-center w-full">Who are you?</p>
 				<div className="grid grid-cols-3 place-items-center max-w-[400px] mx-auto my-10 text-center gap-6">
 					{profiles.map((profile) => (
-						<div
-							key={profile.id}
-							onClick={() => updateSelectedProfile(profile)}>
-							<Avatar active={profile.active} img={profile.img} />
+						<div key={profile.id}>
+							<div onClick={() => updateSelectedProfile(profile)}>
+								<Avatar active={profile.active} img={profile.img} />
+							</div>
+							<p className="w-20 whitespace-nowrap text-ellipsis overflow-hidden">
+								{profile.username}
+							</p>
 						</div>
 					))}
 					<a href="/profile/new" className="avatar placeholder cursor-pointer">
