@@ -69,7 +69,7 @@ const BillSegment = ({ billId }) => {
 		reset({
 			individualCosts: fields.map((payee) => ({
 				...payee,
-				cost: individualAmount.toFixed(1),
+				cost: parseInt(individualAmount),
 			})),
 		});
 	};

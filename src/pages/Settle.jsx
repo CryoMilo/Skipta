@@ -34,7 +34,7 @@ const Settle = () => {
 								<div className="grid grid-cols-3 justify-items-center">
 									{payer} <ArrowLongRightIcon className="w-5" /> {receiver}
 								</div>
-								<div className="text-center">{cost.toFixed(1)} THB</div>
+								<div className="text-center">{parseInt(cost)} THB</div>
 								<p className="text-center pt-3 text-sm select-none">
 									(Click to pay)
 								</p>
